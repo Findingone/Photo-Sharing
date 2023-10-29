@@ -33,7 +33,10 @@ const UserLikedPhotos = () => {
             return params;
         });
     }
-
+    const unlike = (photo_id) => {
+        apiService.likePhotos(photo_id, true);
+        setUserPhotos(UserLikedPhotos.filter(photo => photo.id !== photo_id))
+    }
     return (<div className="master-container">
         <div className="left-block">
             <SidebarPrivate />
@@ -45,6 +48,7 @@ const UserLikedPhotos = () => {
                     UserLikedPhotos.map((image) => {
                         return (<div className="image-container">
                             <img src={image.urls.regular} className="cover-images" />
+                            <div onClick={() => { unlike(image.id) }}> Unlike </div>
                             <span>{image.description}<br /> Likes:{image.likes} </span>
 
                         </div>

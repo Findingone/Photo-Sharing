@@ -13,6 +13,7 @@ import UserPhotos from './components/User/Photos';
 import UserLikedPhotos from './components/User/LikedPhotos';
 import UserCollections from './components/User/Collections';
 import UserStats from './components/User/Stats';
+import UpdatePhoto from './components/User/UpdatePhoto';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/liked_photos" exact element={<UserLikedPhotos />} />
         <Route path="/collections" exact element={<UserCollections />} />
         <Route path="/stats" exact element={<UserStats />} />
+        <Route path="/update_photo" exact element={<UpdatePhoto />} />
 
 
         <Route path="/public/profile" exact element={<Profile />} />

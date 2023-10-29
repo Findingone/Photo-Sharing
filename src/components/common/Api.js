@@ -85,4 +85,23 @@ export default class ApiCalls {
         );
     }
 
+    getPhoto(photo_id) {
+        return axios.get(apiUrl + `${dataUrls["getPhotos"]}/${photo_id}`, {
+            headers: {
+                "Authorization": sessionStorage.getItem("auth-code")
+            }
+        });
+    }
+
+    updatePhoto(photo_id, data) {
+        axios.put(apiUrl + "/photos/" + photo_id, data, {
+            headers: {
+                "Authorization": this.getAuthToken()
+            },
+            params: {
+                "client_id": process.env.REACT_APP_ACCESS_NAME
+            },
+        })
+    }
+
 }

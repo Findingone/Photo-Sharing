@@ -1,0 +1,19 @@
+#complete-photo {
+    height: 90vh;
+    width: 50vw;
+}
+
+#update-photo-container {
+    background-color: antiquewhite;
+    display: inline-block;
+    margin: 0 25px;
+}
+
+#details {
+    height: 90vh;
+    width: 40vw;
+    vertical-align: top;
+    display: inline-block;
+    padding: 30px;
+    overflow: scroll;
+}

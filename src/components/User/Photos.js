@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./Photos.css";
 import SidebarPrivate from "./SidebarPrivate";
@@ -6,6 +6,7 @@ import ApiCalls from "../common/Api";
 const UserPhotos = () => {
     const [params, setParams] = useSearchParams();
     const apiService = ApiCalls.getInstance();
+    const navigate = useNavigate();
     const [UserPhotos, setUserPhotos] = useState(null);
     useEffect(() => {
         apiService.getCommonData(params.get("user_name"), "photos").then((res) => {
@@ -34,6 +35,14 @@ const UserPhotos = () => {
         });
     }
 
+    const updatePhotoPage = (photoid) => {
+        navigate({
+            pathname: "/update_photo",
+            search: createSearchParams({
+                photo_id: photoid
+            }).toString()
+        });
+    }
     return (<div className="master-container">
         <div className="left-block">
             <SidebarPrivate />
@@ -43,7 +52,9 @@ const UserPhotos = () => {
 
                 {
                     UserPhotos.map((image) => {
-                        return (<div className="image-container">
+                        return (<div className="image-container" onClick={() => {
+                            updatePhotoPage(image.id)
+                        }}>
                             <img src={image.urls.regular} className="cover-images" />
                             <span>{image.description}<br /> Likes:{image.likes} </span>
 
