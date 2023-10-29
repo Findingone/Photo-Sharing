@@ -43,7 +43,7 @@ const PublicLikedPhotos = () => {
 
                 {
                     PublicLikedPhotos.map((image) => {
-                        return (<div className="image-container">
+                        return (<div className="image-container" key={image.urls.regular}>
                             <img src={image.urls.regular} className="cover-images" />
                             <span>{image.description}<br /> Likes:{image.likes} </span>
 
@@ -51,8 +51,23 @@ const PublicLikedPhotos = () => {
                         )
                     })
                 }
-                <button onClick={lastPage}>Previous</button>
-                <button onClick={nextPage}>next</button>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <span class="page-link" aria-label="Previous" onClick={lastPage}>
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </span>
+                        </li>
+                        <li class="page-item"><span class="page-link" >{params.get("page")}</span></li>
+                        <li class="page-item">
+                            <span class="page-link" onClick={nextPage} aria-label="Next">
+                                <span class="sr-only">Next</span>
+                                <span aria-hidden="true">&raquo;</span>
+                            </span>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         }
 

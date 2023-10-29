@@ -45,7 +45,7 @@ const UserCollections = () => {
                 <div className="collection-container">
                     {
                         UserCollections.map((collection) => {
-                            return <div className="collection-individual">
+                            return <div className="collection-individual" key={collection.cover_photo.urls.regular} >
                                 <img className="cover-images" src={collection.cover_photo.urls.regular} />
                                 <h4>{collection.title}</h4>
                                 <p className="text-muted">{collection.description}</p>
@@ -55,8 +55,23 @@ const UserCollections = () => {
                     }
                 </div>
 
-                <button onClick={lastPage}>Previous</button>
-                <button onClick={nextPage}>next</button>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <span class="page-link" aria-label="Previous" onClick={lastPage}>
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </span>
+                        </li>
+                        <li class="page-item"><span class="page-link" >{params.get("page")}</span></li>
+                        <li class="page-item">
+                            <span class="page-link" onClick={nextPage} aria-label="Next">
+                                <span class="sr-only">Next</span>
+                                <span aria-hidden="true">&raquo;</span>
+                            </span>
+                        </li>
+                    </ul>
+                </nav>
             </div >
         }
     </div >)
