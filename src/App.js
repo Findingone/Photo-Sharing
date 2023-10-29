@@ -21,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/login" exact element={<UserLogin />} />
         <Route path="/home" exact element={<HomePage />} />
+        <Route path="/" exact element={<HomePage />} />
         <Route path="/profile" exact element={<EditProfile />} />
         <Route path="/photos" exact element={<UserPhotos />} />
         <Route path="/liked_photos" exact element={<UserLikedPhotos />} />

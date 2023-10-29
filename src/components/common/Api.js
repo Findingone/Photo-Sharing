@@ -23,10 +23,11 @@ export default class ApiCalls {
         }
     }
 
-    getCommonData(name, content = 'profile') {
+    getCommonData(name, content = 'profile', page = 1) {
         return axios.get(apiUrl + `/users/${name}${dataUrls[content]}`, {
             params: {
-                "client_id": process.env.REACT_APP_ACCESS_NAME
+                "client_id": process.env.REACT_APP_ACCESS_NAME,
+                "page": page
             }
         })
     }

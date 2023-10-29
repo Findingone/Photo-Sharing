@@ -15,6 +15,25 @@ const PublicCollections = () => {
         });
     }, []);
 
+    const lastPage = () => {
+        let page = parseInt(params.get("page"));
+        if (page > 1) {
+            setParams(params => {
+                params.set("user_name", params.get("user_name"));
+                params.set("page", page - 1);
+                return params;
+            });
+        }
+    }
+    const nextPage = () => {
+        let page = parseInt(params.get("page"));
+        setParams(params => {
+            params.set("user_name", params.get("user_name"));
+            params.set("page", page + 1);
+            return params;
+        });
+    }
+
     return (<div className="master-container">
         <div className="left-block">
             <SidebarCommon />
@@ -34,6 +53,8 @@ const PublicCollections = () => {
                         })
                     }
                 </div>
+                <button onClick={lastPage}>Previous</button>
+                <button onClick={nextPage}>next</button>
             </div >
         }
     </div >)

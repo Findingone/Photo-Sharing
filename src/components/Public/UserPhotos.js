@@ -4,23 +4,34 @@ import { useEffect, useState } from "react";
 import SidebarCommon from "../common/Sidebar";
 import "./UserPhotos.css";
 const PublicPhotos = () => {
-    const [params, setParmas] = useSearchParams();
+    const [params, setParams] = useSearchParams();
     const apiService = ApiCalls.getInstance();
     const [PublicPhotos, setUserPhotos] = useState(null);
     useEffect(() => {
-        apiService.getCommonData(params.get("user_name"), "photos").then((res) => {
+        apiService.getCommonData(params.get("user_name"), "photos", params.get("page")).then((res) => {
             setUserPhotos(res.data);
         }).catch((err) => {
             alert(err);
         })
     }, [params.get("page"), apiService]);
 
+    const lastPage = () => {
+        let page = parseInt(params.get("page"));
+        if (page > 1) {
+            setParams(params => {
+                params.set("user_name", params.get("user_name"));
+                params.set("page", page - 1);
+                return params;
+            });
+        }
+    }
     const nextPage = () => {
         let page = parseInt(params.get("page"));
-        setParmas(params => {
+        setParams(params => {
+            params.set("user_name", params.get("user_name"));
             params.set("page", page + 1);
             return params;
-        })
+        });
     }
     return (<div className="master-container">
         <div className="left-block">
@@ -31,7 +42,7 @@ const PublicPhotos = () => {
 
                 {
                     PublicPhotos.map((image) => {
-                        return (<div className="image-container">
+                        return (<div className="image-container" key={image.urls.regular}>
                             <img src={image.urls.regular} className="cover-images" />
                             <span>{image.description}<br /> Likes:{image.likes} </span>
 
@@ -39,11 +50,12 @@ const PublicPhotos = () => {
                         )
                     })
                 }
-                <button onClick={nextPage}>Change page</button>
+
+                <button onClick={lastPage}>Previous</button>
+                <button onClick={nextPage}>next</button>
 
             </div>
         }
-
 
     </div>)
 }
