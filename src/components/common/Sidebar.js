@@ -1,9 +1,9 @@
 import { List, ListItem, ListItemButton, ListItemText } from "@mui/material";
-import { userPublic } from "./Commondata"
+import { properties } from "./Properties";
 import { Link, createSearchParams, useNavigate, useSearchParams } from "react-router-dom";
 
 const SidebarCommon = () => {
-    const links = userPublic;
+    const links = properties.userPublic;
     const navigate = useNavigate();
     const [params, setParams] = useSearchParams();
     return (

@@ -30,7 +30,6 @@ function App() {
         <Route path="/stats" exact element={<UserStats />} />
         <Route path="/update_photo" exact element={<UpdatePhoto />} />
 
-
         <Route path="/public/profile" exact element={<Profile />} />
         <Route path="/public/photos" exact element={<PublicPhotos />} />
         <Route path="/public/liked_photos" exact element={<PublicLikedPhotos />} />

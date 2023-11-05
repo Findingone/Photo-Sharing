@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiUrl, dataUrls } from "./Commondata";
+import { properties } from "./Properties";
 
 export default class ApiCalls {
     static instance = null;
@@ -24,7 +24,7 @@ export default class ApiCalls {
     }
 
     getCommonData(name, content = 'profile', page = 1) {
-        return axios.get(apiUrl + `/users/${name}${dataUrls[content]}`, {
+        return axios.get(properties.apiUrl + `/users/${name}${properties.dataUrls[content]}`, {
             params: {
                 "client_id": process.env.REACT_APP_ACCESS_NAME,
                 "page": page
@@ -35,7 +35,7 @@ export default class ApiCalls {
 
     likePhotos(photo_id, liked) {
         if (!liked) {
-            return axios.post(apiUrl + `${dataUrls["photos"]}/${photo_id}/like`, {}, {
+            return axios.post(properties.apiUrl + `${properties.dataUrls["photos"]}/${photo_id}${properties.like}`, {}, {
                 headers: {
                     "Authorization": this.getAuthToken()
                 },
@@ -44,7 +44,7 @@ export default class ApiCalls {
                 }
             });
         } else {
-            return axios.delete(apiUrl + `${dataUrls["photos"]}/${photo_id}/like`, {
+            return axios.delete(properties.apiUrl + `${properties.dataUrls["photos"]}/${photo_id}${properties.like}`, {
                 headers: {
                     "Authorization": this.getAuthToken()
                 },
@@ -56,7 +56,7 @@ export default class ApiCalls {
     }
 
     getHomePage() {
-        return axios.get(apiUrl + dataUrls["photos"], {
+        return axios.get(properties.apiUrl + properties.dataUrls["photos"], {
             params: {
                 "client_id": process.env.REACT_APP_ACCESS_NAME
             }
@@ -64,7 +64,7 @@ export default class ApiCalls {
     }
 
     getUserProfile() {
-        return axios.get(apiUrl + "/me", {
+        return axios.get(properties.apiUrl + `${properties.self}`, {
             headers: {
                 "Authorization": this.getAuthToken()
             }
@@ -72,7 +72,7 @@ export default class ApiCalls {
     }
 
     updateUserProfile(data) {
-        return axios.put(apiUrl + "/me",
+        return axios.put(properties.apiUrl + `${properties.self}`,
             data
             , {
                 headers: {
@@ -86,7 +86,7 @@ export default class ApiCalls {
     }
 
     getPhoto(photo_id) {
-        return axios.get(apiUrl + `${dataUrls["getPhotos"]}/${photo_id}`, {
+        return axios.get(properties.apiUrl + `${properties.dataUrls["getPhotos"]}/${photo_id}`, {
             headers: {
                 "Authorization": sessionStorage.getItem("auth-code")
             }
@@ -94,7 +94,7 @@ export default class ApiCalls {
     }
 
     updatePhoto(photo_id, data) {
-        axios.put(apiUrl + "/photos/" + photo_id, data, {
+        axios.put(properties.apiUrl + `${properties.dataUrls.photos}/` + photo_id, data, {
             headers: {
                 "Authorization": this.getAuthToken()
             },

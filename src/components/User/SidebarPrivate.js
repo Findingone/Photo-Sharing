@@ -1,9 +1,10 @@
 import { List, ListItem, ListItemButton, ListItemText } from "@mui/material";
 import { Link, createSearchParams, useNavigate, useSearchParams } from "react-router-dom";
-import { userPrivate } from "../common/Commondata";
+// import { userPrivate } from "../common/Commondata";
+import { properties } from "../common/Properties";
 
 const SidebarPrivate = () => {
-    const links = userPrivate;
+    const links = properties.userPrivate;
     const navigate = useNavigate();
     const [params, setParams] = useSearchParams();
     return (

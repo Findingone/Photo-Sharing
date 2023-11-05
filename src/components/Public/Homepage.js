@@ -23,7 +23,7 @@ const HomePage = () => {
         }))
     }
     return <div className="master-container">
-        {AllPhotos == null ? <div>Loading</div> : <div className="d-flex total-container">
+        {AllPhotos == null ? <div>Loading</div> : <div className="total-container">
             <div>
                 {
                     AllPhotos.map((image) => {

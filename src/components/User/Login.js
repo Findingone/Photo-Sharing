@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-const baseUrl = "https://unsplash.com/oauth/token";
+import { properties } from '../common/Properties.js'
+const baseUrl = properties.loginUrl;
 const UserLogin = () => {
     const navigate = useNavigate();
     const code = new URL(window.location).searchParams.get('code');
