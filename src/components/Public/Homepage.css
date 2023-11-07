@@ -22,3 +22,7 @@
     vertical-align: top;
     overflow-y: scroll;
 }
+
+.dialog {
+    padding: 30px;
+}
