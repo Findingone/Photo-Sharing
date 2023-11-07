@@ -54,6 +54,12 @@ export const properties = {
             name: "Statistics",
             path: "/stats"
         }
-    ]
+    ],
+    collections: {
+        collections: "/collections",
+        photos: "/photos",
+        add_photo: "/add",
+        remove_photo: "/remove"
+    }
 }
 

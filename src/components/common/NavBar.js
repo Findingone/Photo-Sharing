@@ -32,7 +32,7 @@ const CustomNavbar = () => {
                         User
                     </button>
                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        {auth == null && <li><a className="dropdown-item" href={"https://unsplash.com/oauth/authorize?client_id=" + process.env.REACT_APP_ACCESS_NAME + "&scope=public+read_user+write_user+read_photos+write_photos+write_likes+read_collections&response_type=code&redirect_uri=http%3A%2F%2F127.0.0.1:3000%2Flogin"}>Login</a></li>}
+                        {auth == null && <li><a className="dropdown-item" href={"https://unsplash.com/oauth/authorize?client_id=" + process.env.REACT_APP_ACCESS_NAME + "&scope=public+read_user+write_user+read_photos+write_photos+write_likes+read_collections+write_collections&response_type=code&redirect_uri=http%3A%2F%2F127.0.0.1:3000%2Flogin"}>Login</a></li>}
                         {auth != null && <li><Link className="dropdown-item" to="/profile">Profile</Link></li>}
                         {auth != null && <li onClick={logout} className="dropdown-item">Logout</li>}
                     </ul>

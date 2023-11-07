@@ -1,15 +1,23 @@
 import { useEffect, useState } from "react";
 import './Homepage.css';
 import ApiCalls from "../common/Api";
+import { useSearchParams } from "react-router-dom";
 
 const HomePage = () => {
     const [AllPhotos, setPhotos] = useState(null);
+    const [params, setParams] = useSearchParams();
     const apiService = ApiCalls.getInstance();
     useEffect(() => {
-        apiService.getHomePage().then((res) => {
+        if (params.get("page") == null) {
+            setParams(params => {
+                params.set("page", 1);
+                return params;
+            })
+        }
+        apiService.getHomePage(params.get("page")).then((res) => {
             setPhotos(res.data);
         })
-    }, [apiService]);
+    }, [apiService, params.get("page")]);
 
     const likePhoto = (photo_id, liked) => {
         apiService.likePhotos(photo_id, liked).catch((err) => {
@@ -21,6 +29,23 @@ const HomePage = () => {
             }
             return photo;
         }))
+    }
+
+    const lastPage = () => {
+        let page = parseInt(params.get("page"));
+        if (page > 1) {
+            setParams(params => {
+                params.set("page", page - 1);
+                return params;
+            });
+        }
+    }
+    const nextPage = () => {
+        let page = parseInt(params.get("page"));
+        setParams(params => {
+            params.set("page", page + 1);
+            return params;
+        });
     }
     return <div className="master-container">
         {AllPhotos == null ? <div>Loading</div> : <div className="total-container">
@@ -36,6 +61,23 @@ const HomePage = () => {
                     })
                 }
             </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <span class="page-link" aria-label="Previous" onClick={lastPage}>
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </span>
+                    </li>
+                    <li class="page-item"><span class="page-link" >{params.get("page")}</span></li>
+                    <li class="page-item">
+                        <span class="page-link" onClick={nextPage} aria-label="Next">
+                            <span class="sr-only">Next</span>
+                            <span aria-hidden="true">&raquo;</span>
+                        </span>
+                    </li>
+                </ul>
+            </nav>
         </div>
         }
 
